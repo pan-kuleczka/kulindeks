@@ -26,6 +26,7 @@ class AppText {
   // settings tabs / about
   final String tabSync, tabAbout, version, licenses, about, aboutBody, notAffiliated;
   final String accentColor, emailWarning;
+  final String sourceCode, licensedUnder, thirdPartyLicenses;
   // messages
   final String noMessages, noSubject, message, attachments;
   // dashboard
@@ -102,6 +103,9 @@ class AppText {
     required this.notAffiliated,
     required this.accentColor,
     required this.emailWarning,
+    required this.sourceCode,
+    required this.licensedUnder,
+    required this.thirdPartyLicenses,
     required this.noMessages,
     required this.noSubject,
     required this.message,
@@ -182,6 +186,9 @@ class AppText {
     notAffiliated: 'Projekt niezależny. Niepowiązany z Simple S.A. ani uczelnią.',
     accentColor: 'Kolor akcentu',
     emailWarning: 'To jest login, nie adres e-mail — być może trzeba usunąć część @...',
+    sourceCode: 'Kod źródłowy',
+    licensedUnder: 'Na licencji GNU GPL v3',
+    thirdPartyLicenses: 'Licencje bibliotek',
     noMessages: 'Brak wiadomości', noSubject: '(bez tematu)',
     message: 'Wiadomość', attachments: 'Załączniki',
     morning: 'Dzień dobry', hello: 'Cześć', evening: 'Dobry wieczór',
@@ -241,6 +248,9 @@ class AppText {
     notAffiliated: 'Independent project. Not affiliated with Simple S.A. or any university.',
     accentColor: 'Accent color',
     emailWarning: 'This is a login, not an email — you may need to remove the @... part.',
+    sourceCode: 'Source code',
+    licensedUnder: 'Licensed under the GNU GPL v3',
+    thirdPartyLicenses: 'Third-party licenses',
     noMessages: 'No messages', noSubject: '(no subject)',
     message: 'Message', attachments: 'Attachments',
     morning: 'Good morning', hello: 'Hello', evening: 'Good evening',

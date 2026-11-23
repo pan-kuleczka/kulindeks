@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
+import 'package:url_launcher/url_launcher.dart';
 
 import '../api/caldav.dart';
 import '../api/models.dart';
@@ -8,6 +9,10 @@ import '../state/settings.dart';
 import 'util.dart';
 
 const kAppVersion = '0.1.0';
+const kRepoUrl = 'https://github.com/pan-kuleczka/kulindeks';
+const kLegalese =
+    'Kulindeks © 2026 pan-kuleczka — GNU GPL v3.\n'
+    'Independent project. Not affiliated with Simple S.A. or any university.';
 
 const kAccentPalette = [
   '#2962FF', // blue (default)
@@ -265,13 +270,26 @@ class _SettingsScreenState extends State<SettingsScreen> {
           subtitle: const Text('Kulindeks $kAppVersion'),
         ),
         ListTile(
+          leading: const Icon(Icons.copyright_outlined),
+          title: Text(t.licensedUnder as String),
+          subtitle: const Text('© 2026 pan-kuleczka'),
+        ),
+        ListTile(
+          leading: const Icon(Icons.code),
+          title: Text(t.sourceCode as String),
+          subtitle: const Text(kRepoUrl),
+          trailing: const Icon(Icons.open_in_new, size: 18),
+          onTap: () => _open(kRepoUrl),
+        ),
+        ListTile(
           leading: const Icon(Icons.description_outlined),
-          title: Text(t.licenses as String),
+          title: Text(t.thirdPartyLicenses as String),
           trailing: const Icon(Icons.chevron_right),
           onTap: () => showLicensePage(
             context: context,
             applicationName: 'Kulindeks',
             applicationVersion: kAppVersion,
+            applicationLegalese: kLegalese,
           ),
         ),
         ListTile(
@@ -282,11 +300,10 @@ class _SettingsScreenState extends State<SettingsScreen> {
             context: context,
             applicationName: 'Kulindeks',
             applicationVersion: kAppVersion,
+            applicationLegalese: kLegalese,
             children: [
+              const SizedBox(height: 8),
               Text(t.aboutBody as String),
-              const SizedBox(height: 12),
-              Text(t.notAffiliated as String,
-                  style: Theme.of(context).textTheme.bodySmall),
             ],
           ),
         ),
@@ -297,6 +314,13 @@ class _SettingsScreenState extends State<SettingsScreen> {
         ),
       ],
     );
+  }
+
+  Future<void> _open(String url) async {
+    final uri = Uri.parse(url);
+    if (await canLaunchUrl(uri)) {
+      await launchUrl(uri, mode: LaunchMode.externalApplication);
+    }
   }
 
   Widget _field(TextEditingController c, String label,

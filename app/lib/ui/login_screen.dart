@@ -5,7 +5,7 @@ import '../api/client.dart';
 import '../api/models.dart';
 import '../state/app_state.dart';
 import '../state/settings.dart';
-import 'settings_screen.dart' show kAppVersion;
+import 'settings_screen.dart' show kAppVersion, kLegalese;
 
 class LoginScreen extends StatefulWidget {
   const LoginScreen({super.key});
@@ -92,7 +92,9 @@ class _LoginScreenState extends State<LoginScreen> {
         context: context,
         applicationName: 'Kulindeks',
         applicationVersion: kAppVersion,
+        applicationLegalese: kLegalese,
         children: [
+          const SizedBox(height: 8),
           Text(s.text.aboutBody),
           const SizedBox(height: 12),
           Text(s.text.notAffiliated, style: Theme.of(context).textTheme.bodySmall),

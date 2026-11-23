@@ -1,68 +1,73 @@
-# Indeks (Flutter)
+# Kulindeks (Flutter app)
 
 A faster, cleaner client for the **mStudent API** (Simple S.A.'s university
-backend) — reverse-engineered in `../docs/protocol.md`. Talks directly to each
-university's backend over HTTPS; no pinning, no middleman.
+backend) — reverse-engineered in [`../docs/protocol.md`](../docs/protocol.md).
+Talks directly to each university's backend over HTTPS; no middleman.
 
-> **Name:** "Indeks" (the Polish term for a student grade-book) is a placeholder
-> chosen to avoid any trademark issue with the original "mStudent" app. To
-> rebrand, change `name:` in `pubspec.yaml`, the display strings in
-> `lib/main.dart` / `lib/ui/login_screen.dart`, and re-run
-> `flutter create . --platforms=android,linux --org <you> --project-name <name>`.
-> References to the *mStudent API* itself are factual and intentionally kept.
+Part of the [Kulindeks](https://github.com/pan-kuleczka/kulindeks) project.
+**Independent / unofficial** — not affiliated with Simple S.A. or any university.
 
-## Features (v0.1)
-- **Multi-university login** via the live discovery endpoint (pick your college).
-- **Unified dashboard**: next class, GPA, outstanding dues, unread messages.
-- **Grades + GPA**: ECTS-weighted average and arithmetic mean, color-coded, per
-  kierunek/semestr.
-- **Calendar**: month/week timetable with a day agenda (weekly entries expanded
-  to real dates), tap a room to open it in maps (the API returns room GPS),
-  one-tap **.ics export**, and **Nextcloud (CalDAV) sync** from Settings.
-- **Finances**: dues with an outstanding-total card.
-- **Messages**: inbox with unread highlighting.
-- **Speed/caching**: every screen renders cached data instantly, then refreshes
-  in the background (`JsonCache`); the session is kept until it expires and only
-  re-logs in on 401 — unlike the official app, which re-authenticates constantly.
-- Session + credentials stored in a plain file in the app-support dir (no native keyring dep; portable across Android/iOS/Linux).
+## Features
+- **Multi-university login** via the live discovery endpoint.
+- **Dashboard** — identity card → full student info, next class, GPA, dues, unread
+  messages; every tile taps through to its section.
+- **Timetable** — Day / Week / Month calendar on a time grid, swipe to change
+  period, room → maps, `.ics` export, one-tap **Nextcloud (CalDAV) sync**.
+- **Grades** — ECTS-weighted + arithmetic averages, color-coded, per programme/semester.
+- **Finances** — dues and scholarships.
+- **Messages** — inbox + full message view.
+- **Appearance & i18n** — light / dark / high-contrast themes, custom accent color,
+  font scale, **Polish & English** (switchable at login and in settings).
+- **Notifications** — class reminders a configurable time before each class
+  (OS-scheduled on Android; in-app timers on desktop).
+- **Speed / offline** — cache-first rendering, background refresh, and a clear
+  offline banner that keeps showing cached data.
 
 ## Architecture
 ```
 lib/
   api/      client.dart   MStudentClient — discovery, auth, endpoints (dep-free dart:io)
             models.dart   typed models (AuthSession, Grade, ClassEvent, …)
-  state/    app_state.dart ChangeNotifier: auth + cache-first loaders (Resource<T>)
-            cache.dart     TTL JSON cache (shared_preferences)
-            session_store.dart  secure session/credential persistence
-  ui/       login / home (bottom-nav) + dashboard/grades/timetable/finance/messages tabs
+            caldav.dart   minimal CalDAV push for Nextcloud sync
+  l10n/     strings.dart  pl / en dictionary
+  state/    app_state.dart   ChangeNotifier: auth + cache-first loaders (Resource<T>)
+            settings.dart    prefs (theme, locale, font, accent, notifications, Nextcloud)
+            session_store.dart  on-device session/credential persistence
+            cache.dart / notifications.dart
+  ui/       login / home (bottom-nav) + dashboard/timetable/grades/finance/messages
+            + student_info / message_detail / settings
 ```
-The API client is UI-agnostic and runs standalone (see `example/discover.dart`:
-`dart run example/discover.dart`).
+The API client is UI-agnostic and runs standalone — see
+`example/discover.dart` (`dart run example/discover.dart`).
 
-## Run on Linux (works right now, no phone needed)
-```
+**Credentials & data** are stored in a plain file in the app-support directory
+(no native keyring dependency; portable across Android/iOS/Linux). Nothing leaves
+the device except requests to your own university's server. No analytics.
+
+## Run on Linux desktop
+```bash
 bash build_linux.sh     # builds a native GTK app (uses nix for the toolchain)
 bash run_linux.sh       # launches it with the right runtime libs (NixOS-friendly)
 ```
-`build_linux.sh` pulls the Linux build toolchain via `nix-shell`; the binary
-lands at `build/linux/x64/release/bundle/indeks`. `run_linux.sh` sets
-`LD_LIBRARY_PATH` to the nix GTK libs so it launches cleanly on NixOS.
-The storage layer is a plain file (no keyring dependency), so it runs anywhere.
+Binary lands at `build/linux/x64/release/bundle/kulindeks`.
 
-## Build & run on Android
-```
+## Build for Android
+With a standard Flutter + Android SDK setup:
+```bash
 flutter pub get
-flutter run                 # on a connected device/emulator
-flutter build apk --release # installable APK
+flutter build apk --release                 # universal APK (all ABIs)
+flutter build apk --release --split-per-abi # one APK per ABI (smaller downloads)
+flutter build appbundle --release           # .aab for Play Store
 ```
-Requires Flutter ≥ 3.22 and the Android SDK. iOS: the code is iOS-compatible
-(no Android-only APIs); run `flutter create . --platforms=ios` to add the iOS
-project, then build on a Mac.
+On **NixOS**, the SDK/JDK/NDK are assembled by nix — just run:
+```bash
+bash build_apk.sh          # release APKs for arm64-v8a, armeabi-v7a, x86_64
+```
+(`build_apk.sh` uses `android-shell.nix`, which pins the Android SDK + NDK and
+applies the NixOS-specific `aapt2` override.)
 
-## Status / next
-Read-only today. Natural next steps: message detail view + attachments, push
-notifications (FCM — the API has `/api/notifications/...`), scholarships &
-bank-account screens, timetable week/calendar view, biometric unlock.
+iOS: the code is iOS-compatible (no Android-only APIs); run
+`flutter create . --platforms=ios` to add the iOS project, then build on a Mac.
 
-> Personal project. Not affiliated with or endorsed by Simple S.A. or any
-> university. Use your own credentials against your own account.
+## License
+[GNU GPL v3](../LICENSE).
