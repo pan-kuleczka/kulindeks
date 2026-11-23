@@ -4,7 +4,6 @@
 // Run:  flutter test test/screenshots_test.dart
 // Output: ../screenshots/*.png  (phone resolution, light/dark, PL/EN).
 import 'dart:io';
-import 'dart:typed_data';
 import 'dart:ui' as ui;
 
 import 'package:flutter/material.dart';
