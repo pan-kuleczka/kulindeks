@@ -1,0 +1,18 @@
+apk/
+extracted/
+runtime/
+libapp_strings.txt
+paths.txt
+captures/
+*.b64
+__pycache__/
+
+# Flutter
+app/.dart_tool/
+app/build/
+app/.flutter-plugins*
+app/android/.gradle/
+app/android/local.properties
+app/**/GeneratedPluginRegistrant.*
+app/.flutter-plugins-dependencies
+app/.metadata
