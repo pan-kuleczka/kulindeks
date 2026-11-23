@@ -8,7 +8,7 @@ import '../state/app_state.dart';
 import '../state/settings.dart';
 import 'util.dart';
 
-const kAppVersion = '0.1.0';
+const kAppVersion = '0.1.1';
 const kRepoUrl = 'https://github.com/pan-kuleczka/kulindeks';
 const kLegalese =
     'Kulindeks © 2026 pan-kuleczka — GNU GPL v3.\n'

@@ -1,0 +1,25 @@
+Kulindeks to niezależny, otwartoźródłowy klient uczelnianego systemu mStudent
+(firmy Simple S.A.), z którego korzysta wiele polskich uczelni. To
+czytelniejsza i szybsza alternatywa oparta na tym samym zapleczu.
+
+Funkcje:
+* Pulpit — wizytówka studenta, najbliższe zajęcia, średnia ocen, należności do
+  zapłaty i nieprzeczytane wiadomości; każdy kafelek prowadzi do właściwej
+  sekcji.
+* Plan zajęć — prawdziwy kalendarz z widokami Dzień / Tydzień / Miesiąc,
+  przewijaniem gestem, lokalizacją sal na mapie, eksportem iCalendar (.ics)
+  oraz synchronizacją z Nextcloud (CalDAV) jednym dotknięciem.
+* Oceny — średnia ważona ECTS i arytmetyczna, z kolorami, dla kierunku i
+  semestru.
+* Finanse — należności i stypendia.
+* Wiadomości — skrzynka z podglądem treści.
+* Motywy jasny, ciemny i wysokiego kontrastu, własny kolor akcentu, regulacja
+  wielkości czcionki, polski i angielski, przypomnienia o zajęciach oraz
+  czytelny wskaźnik trybu offline.
+
+Prywatność: aplikacja łączy się wyłącznie z serwerem Twojej uczelni, używając
+Twojego loginu, i przechowuje dane na urządzeniu. Nic nie jest wysyłane gdzie
+indziej — brak analityki, reklam i śledzenia.
+
+Projekt nieoficjalny i niezależny. Niepowiązany z Simple S.A. ani żadną
+uczelnią. Używaj z własnym kontem.

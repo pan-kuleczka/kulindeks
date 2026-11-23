@@ -1,0 +1,52 @@
+# F-Droid build metadata for Kulindeks.
+# Submit by copying this to fdroiddata/metadata/com.pankuleczka.kulindeks.yml
+# (see fdroid/README.md). Fields with TODO must be checked against what the
+# F-Droid buildserver currently provides.
+
+Categories:
+  - Education
+License: GPL-3.0-only
+AuthorName: pan-kuleczka
+SourceCode: https://github.com/pan-kuleczka/kulindeks
+IssueTracker: https://github.com/pan-kuleczka/kulindeks/issues
+Changelog: https://github.com/pan-kuleczka/kulindeks/releases
+
+AutoName: Kulindeks
+
+# The app requires a proprietary university backend (mStudent / bazus).
+AntiFeatures:
+  - NonFreeNet
+
+RepoType: git
+Repo: https://github.com/pan-kuleczka/kulindeks.git
+
+Builds:
+  - versionName: 0.1.1
+    versionCode: 2
+    commit: v0.1.1
+    subdir: app
+    # Flutter app. Pin to a stable the project supports (>= 3.22) and that the
+    # F-Droid buildserver offers as a flutter srclib. TODO: confirm version.
+    srclibs:
+      - flutter@stable
+    # Native code is pulled transitively (jni, via path_provider_android /
+    # shared_preferences_android), so an NDK is required. TODO: confirm tag.
+    ndk: r28b
+    output: build/app/outputs/flutter-apk/app-release.apk
+    build:
+      - $$flutter$$/bin/flutter config --no-analytics
+      - $$flutter$$/bin/flutter pub get
+      - $$flutter$$/bin/flutter build apk --release
+
+MaintainerNotes: |-
+  Flutter (Dart) app in subdir "app". No proprietary dependencies; native code
+  is only the transitive jni used by path_provider/shared_preferences.
+  android/gradle.properties sets android.builder.sdkDownload=false so AGP does
+  not try to auto-install SDK/NDK components — the buildserver must provide the
+  compileSdk (36) and build-tools. The app talks only to the user's own
+  university server; hence the NonFreeNet anti-feature.
+
+AutoUpdateMode: Version v%v
+UpdateCheckMode: Tags
+CurrentVersion: 0.1.1
+CurrentVersionCode: 2

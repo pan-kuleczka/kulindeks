@@ -1,0 +1,1 @@
+A faster, cleaner client for your university's mStudent system.

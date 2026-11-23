@@ -1,0 +1,24 @@
+Kulindeks is an independent, open-source client for the mStudent university
+system used by many Polish universities (made by Simple S.A.). It is a cleaner,
+faster alternative built on the same backend.
+
+Features:
+* Dashboard — your student card, next class, grade average, outstanding
+  payments and unread messages, each tapping through to the right section.
+* Timetable — a real calendar with Day / Week / Month views, swipe navigation,
+  room locations on a map, iCalendar (.ics) export, and one-tap Nextcloud
+  (CalDAV) sync.
+* Grades — ECTS-weighted and arithmetic averages, color-coded, per programme
+  and semester.
+* Finances — dues and scholarships.
+* Messages — inbox with a full message view.
+* Light, dark and high-contrast themes, a custom accent color, adjustable font
+  size, Polish and English, class reminders, and a clear offline indicator that
+  keeps showing cached data.
+
+Privacy: the app talks only to your own university's server using your own
+login, and stores data on your device. Nothing is sent anywhere else — no
+analytics, no ads, no tracking.
+
+Unofficial / independent project. Not affiliated with, endorsed by, or
+connected to Simple S.A. or any university. Use it with your own account.

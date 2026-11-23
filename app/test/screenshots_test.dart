@@ -1,3 +1,4 @@
+// ignore_for_file: depend_on_referenced_packages
 // Generates app screenshots headlessly with mock data (no network, no account).
 // Uses the real Android UI font (Roboto, Apache-2.0, loaded from test/fonts/).
 // Run:  flutter test test/screenshots_test.dart
@@ -200,6 +201,9 @@ void main() {
       ['grades-dark', 2, 'pl', Brightness.dark],
       ['dashboard-en', 0, 'en', Brightness.light],
       ['timetable-en', 1, 'en', Brightness.light],
+      ['grades-en', 2, 'en', Brightness.light],
+      ['finance-en', 3, 'en', Brightness.light],
+      ['messages-en', 4, 'en', Brightness.light],
     ];
 
     for (final s in shots) {

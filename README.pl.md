@@ -1,3 +1,5 @@
+<p align="center"><img src="app/assets/icon/icon.png" width="96" alt="Kulindeks"/></p>
+
 # Kulindeks
 
 *Przeczytaj w języku: [English](README.md) · **Polski***
