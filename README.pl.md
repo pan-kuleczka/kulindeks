@@ -57,21 +57,19 @@ Gdybyś chciał(a) ją usunąć, po prostu przytrzymaj ikonę aplikacji →
 ## Zrzuty ekranu
 
 <p align="center">
-  <img src="screenshots/dashboard.png" width="180" alt="Pulpit"/>
-  <img src="screenshots/timetable.png" width="180" alt="Plan zajęć"/>
-  <img src="screenshots/grades.png" width="180" alt="Oceny"/>
-  <img src="screenshots/finance.png" width="180" alt="Finanse"/>
-  <img src="screenshots/messages.png" width="180" alt="Wiadomości"/>
+  <img src="screenshots/dashboard.png" width="200" alt="Pulpit"/>
+  <img src="screenshots/timetable.png" width="200" alt="Plan zajęć"/>
+  <img src="screenshots/grades.png" width="200" alt="Oceny"/>
+  <img src="screenshots/messages.png" width="200" alt="Wiadomości"/>
 </p>
 
 **Motyw ciemny i interfejs angielski:**
 
 <p align="center">
-  <img src="screenshots/dashboard-dark.png" width="180" alt="Pulpit (ciemny)"/>
-  <img src="screenshots/timetable-dark.png" width="180" alt="Plan zajęć (ciemny)"/>
-  <img src="screenshots/grades-dark.png" width="180" alt="Oceny (ciemny)"/>
-  <img src="screenshots/dashboard-en.png" width="180" alt="Pulpit (angielski)"/>
-  <img src="screenshots/timetable-en.png" width="180" alt="Plan zajęć (angielski)"/>
+  <img src="screenshots/dashboard-dark.png" width="200" alt="Pulpit (ciemny)"/>
+  <img src="screenshots/timetable-dark.png" width="200" alt="Plan zajęć (ciemny)"/>
+  <img src="screenshots/dashboard-en.png" width="200" alt="Pulpit (angielski)"/>
+  <img src="screenshots/timetable-en.png" width="200" alt="Plan zajęć (angielski)"/>
 </p>
 
 <sub>Zrzuty korzystają z danych przykładowych i prawdziwej czcionki Androida

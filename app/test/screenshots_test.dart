@@ -41,13 +41,18 @@ class _FakePathProvider extends PathProviderPlatform with MockPlatformInterfaceM
 String _d(DateTime d) =>
     '${d.day.toString().padLeft(2, '0')}-${d.month.toString().padLeft(2, '0')}-${d.year}';
 
-Future<void> _loadRoboto() async {
-  final loader = FontLoader('Roboto');
+Future<void> _loadFonts() async {
+  final roboto = FontLoader('Roboto');
   for (final f in ['Roboto-Regular.ttf', 'Roboto-Medium.ttf', 'Roboto-Bold.ttf']) {
     final bytes = File('test/fonts/$f').readAsBytesSync();
-    loader.addFont(Future.value(ByteData.sublistView(bytes)));
+    roboto.addFont(Future.value(ByteData.sublistView(bytes)));
   }
-  await loader.load();
+  await roboto.load();
+  // color emoji (flags etc.) as a fallback family
+  final emoji = FontLoader('NotoColorEmoji')
+    ..addFont(Future.value(
+        ByteData.sublistView(File('test/fonts/NotoColorEmoji.ttf').readAsBytesSync())));
+  await emoji.load();
 }
 
 Future<AppState> _mockState() async {
@@ -149,6 +154,7 @@ Widget _app(AppState state, Brightness b) => ChangeNotifierProvider<AppState>.va
               seedColor: const Color(0xFF2962FF), brightness: b),
           useMaterial3: true,
           fontFamily: 'Roboto',
+          fontFamilyFallback: const ['NotoColorEmoji'],
         ),
         locale: Locale(state.prefs.locale),
         supportedLocales: const [Locale('pl'), Locale('en')],
@@ -170,7 +176,7 @@ void main() {
     await initializeDateFormatting('pl_PL');
     await initializeDateFormatting('en');
     await loadAppFonts(); // MaterialIcons etc.
-    await _loadRoboto(); // real Android UI font
+    await _loadFonts(); // real Android UI font (Roboto) + color emoji
   });
 
   testWidgets('generate screenshots', (tester) async {

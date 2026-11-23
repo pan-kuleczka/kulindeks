@@ -57,21 +57,19 @@ any other app. Nothing is left behind.
 ## Screenshots
 
 <p align="center">
-  <img src="screenshots/dashboard.png" width="180" alt="Dashboard"/>
-  <img src="screenshots/timetable.png" width="180" alt="Timetable"/>
-  <img src="screenshots/grades.png" width="180" alt="Grades"/>
-  <img src="screenshots/finance.png" width="180" alt="Finances"/>
-  <img src="screenshots/messages.png" width="180" alt="Messages"/>
+  <img src="screenshots/dashboard.png" width="200" alt="Dashboard"/>
+  <img src="screenshots/timetable.png" width="200" alt="Timetable"/>
+  <img src="screenshots/grades.png" width="200" alt="Grades"/>
+  <img src="screenshots/messages.png" width="200" alt="Messages"/>
 </p>
 
 **Dark theme & English interface:**
 
 <p align="center">
-  <img src="screenshots/dashboard-dark.png" width="180" alt="Dashboard (dark)"/>
-  <img src="screenshots/timetable-dark.png" width="180" alt="Timetable (dark)"/>
-  <img src="screenshots/grades-dark.png" width="180" alt="Grades (dark)"/>
-  <img src="screenshots/dashboard-en.png" width="180" alt="Dashboard (English)"/>
-  <img src="screenshots/timetable-en.png" width="180" alt="Timetable (English)"/>
+  <img src="screenshots/dashboard-dark.png" width="200" alt="Dashboard (dark)"/>
+  <img src="screenshots/timetable-dark.png" width="200" alt="Timetable (dark)"/>
+  <img src="screenshots/dashboard-en.png" width="200" alt="Dashboard (English)"/>
+  <img src="screenshots/timetable-en.png" width="200" alt="Timetable (English)"/>
 </p>
 
 <sub>Screenshots use mock data and the real Android UI font (Roboto); generated
