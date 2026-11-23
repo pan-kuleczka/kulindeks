@@ -1,10 +1,15 @@
-# mStudent — protocol reverse-engineering + a better client
+# kulindeks
 
+## AI disclosure
+The project is quite obviously mostly vibe-coded. This may be a flaw to you, but in my opinion it is still better than the original client.
+I have done my best to ensure it is as safe as possible. Approach with caution. 
+
+## Contents
 Two things live here:
 1. **The reverse-engineered protocol** of Simple S.A.'s **mStudent** app
    (`com.simple.mSimple_Student`, Flutter/Dart), plus the tooling and capture rig
    used to recover it.
-2. **Indeks**, a cleaner replacement Flutter client built on that protocol (runs on Android and Linux desktop).
+2. **kulindeks**, a cleaner replacement Flutter client built on that protocol (runs on Android and Linux desktop for now).
 
 ## Layout
 | Path | What |
