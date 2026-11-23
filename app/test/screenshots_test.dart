@@ -1,16 +1,21 @@
 // Generates app screenshots headlessly with mock data (no network, no account).
+// Uses the real Android UI font (Roboto, Apache-2.0, loaded from test/fonts/).
 // Run:  flutter test test/screenshots_test.dart
-// Output: ../screenshots/*.png (phone resolution).
+// Output: ../screenshots/*.png  (phone resolution, light/dark, PL/EN).
 import 'dart:io';
+import 'dart:typed_data';
 import 'dart:ui' as ui;
 
 import 'package:flutter/material.dart';
 import 'package:flutter/rendering.dart';
+import 'package:flutter/services.dart';
 import 'package:flutter_localizations/flutter_localizations.dart';
 import 'package:flutter_test/flutter_test.dart';
 import 'package:golden_toolkit/golden_toolkit.dart';
 import 'package:intl/date_symbol_data_local.dart';
 import 'package:intl/intl.dart';
+import 'package:path_provider_platform_interface/path_provider_platform_interface.dart';
+import 'package:plugin_platform_interface/plugin_platform_interface.dart';
 import 'package:provider/provider.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 
@@ -22,11 +27,30 @@ import 'package:kulindeks/state/session_store.dart';
 import 'package:kulindeks/state/settings.dart';
 import 'package:kulindeks/ui/home_screen.dart';
 
+class _FakePathProvider extends PathProviderPlatform with MockPlatformInterfaceMixin {
+  final String dir;
+  _FakePathProvider(this.dir);
+  @override
+  Future<String?> getApplicationSupportPath() async => dir;
+  @override
+  Future<String?> getTemporaryPath() async => dir;
+  @override
+  Future<String?> getApplicationDocumentsPath() async => dir;
+}
+
 String _d(DateTime d) =>
     '${d.day.toString().padLeft(2, '0')}-${d.month.toString().padLeft(2, '0')}-${d.year}';
 
+Future<void> _loadRoboto() async {
+  final loader = FontLoader('Roboto');
+  for (final f in ['Roboto-Regular.ttf', 'Roboto-Medium.ttf', 'Roboto-Bold.ttf']) {
+    final bytes = File('test/fonts/$f').readAsBytesSync();
+    loader.addFont(Future.value(ByteData.sublistView(bytes)));
+  }
+  await loader.load();
+}
+
 Future<AppState> _mockState() async {
-  SharedPreferences.setMockInitialValues({});
   final state = AppState(
       SessionStore(), await JsonCache.open(), SettingsStore(), NotificationService());
   state.status = AuthStatus.loggedIn;
@@ -35,9 +59,7 @@ Future<AppState> _mockState() async {
   state.semestr = 3;
 
   state.info.value = {
-    'imie': 'Jan',
-    'drugieImie': 'Maria',
-    'nazwisko': 'Kowalski',
+    'imie': 'Jan', 'drugieImie': 'Maria', 'nazwisko': 'Kowalski',
     'numerAlbumu': '123456',
   };
   state.kierunki.value = [
@@ -50,7 +72,6 @@ Future<AppState> _mockState() async {
     Semestr.fromJson({'id': 3, 'nazwa': 'Semestr 3', 'semestr': 3, 'aktywny': true}),
   ];
 
-  // grades
   final subjects = [
     ['Analiza matematyczna', 'Wykład', '4.5', 6.0],
     ['Programowanie obiektowe', 'Ćwiczenia laboratoryjne', '5.0', 5.0],
@@ -69,7 +90,6 @@ Future<AppState> _mockState() async {
       }),
   ];
 
-  // timetable — this week, so "next class" shows
   final monday = DateTime.now().subtract(Duration(days: DateTime.now().weekday - 1));
   final plan = [
     [0, 'Pon.', '08:00', '09:30', 'Analiza matematyczna', 'Wykład'],
@@ -93,7 +113,6 @@ Future<AppState> _mockState() async {
       }),
   ];
 
-  // finances
   state.dues.value = [
     Naleznosc.fromJson({
       'idFinanse': 1, 'rodzaj': 'Czesne', 'typ': 'Opłata', 'tytul': 'Czesne — semestr zimowy',
@@ -105,7 +124,6 @@ Future<AppState> _mockState() async {
     }),
   ];
 
-  // messages
   final msgs = [
     ['Spotkanie organizacyjne', 'Dziekanat', false],
     ['Wyniki egzaminu z analizy', 'dr Anna Nowak', false],
@@ -122,15 +140,17 @@ Future<AppState> _mockState() async {
   return state;
 }
 
-Widget _app(AppState state) => ChangeNotifierProvider<AppState>.value(
+Widget _app(AppState state, Brightness b) => ChangeNotifierProvider<AppState>.value(
       value: state,
       child: MaterialApp(
         debugShowCheckedModeBanner: false,
         theme: ThemeData(
-          colorScheme: ColorScheme.fromSeed(seedColor: const Color(0xFF2962FF)),
+          colorScheme: ColorScheme.fromSeed(
+              seedColor: const Color(0xFF2962FF), brightness: b),
           useMaterial3: true,
+          fontFamily: 'Roboto',
         ),
-        locale: const Locale('pl'),
+        locale: Locale(state.prefs.locale),
         supportedLocales: const [Locale('pl'), Locale('en')],
         localizationsDelegates: const [
           GlobalMaterialLocalizations.delegate,
@@ -143,9 +163,14 @@ Widget _app(AppState state) => ChangeNotifierProvider<AppState>.value(
 
 void main() {
   setUpAll(() async {
+    final tmp = Directory.systemTemp.createTempSync('kul_ss').path;
+    PathProviderPlatform.instance = _FakePathProvider(tmp);
+    SharedPreferences.setMockInitialValues({});
     Intl.defaultLocale = 'pl_PL';
     await initializeDateFormatting('pl_PL');
-    await loadAppFonts();
+    await initializeDateFormatting('en');
+    await loadAppFonts(); // MaterialIcons etc.
+    await _loadRoboto(); // real Android UI font
   });
 
   testWidgets('generate screenshots', (tester) async {
@@ -157,25 +182,39 @@ void main() {
     final state = await _mockState();
     Directory('../screenshots').createSync(recursive: true);
 
-    const tabs = {
-      0: 'dashboard',
-      1: 'timetable',
-      2: 'grades',
-      3: 'finance',
-      4: 'messages',
-    };
+    // (filename, tabIndex, locale, brightness)
+    final shots = <List<Object>>[
+      ['dashboard', 0, 'pl', Brightness.light],
+      ['timetable', 1, 'pl', Brightness.light],
+      ['grades', 2, 'pl', Brightness.light],
+      ['finance', 3, 'pl', Brightness.light],
+      ['messages', 4, 'pl', Brightness.light],
+      ['dashboard-dark', 0, 'pl', Brightness.dark],
+      ['timetable-dark', 1, 'pl', Brightness.dark],
+      ['grades-dark', 2, 'pl', Brightness.dark],
+      ['dashboard-en', 0, 'en', Brightness.light],
+      ['timetable-en', 1, 'en', Brightness.light],
+    ];
 
-    for (final entry in tabs.entries) {
-      state.tab = entry.key;
+    for (final s in shots) {
+      final name = s[0] as String;
+      final tab = s[1] as int;
+      final locale = s[2] as String;
+      final brightness = s[3] as Brightness;
+
+      if (state.prefs.locale != locale) {
+        await tester.runAsync(() => state.setLocale(locale));
+      }
+      state.tab = tab;
       final key = GlobalKey();
-      await tester.pumpWidget(RepaintBoundary(key: key, child: _app(state)));
+      await tester.pumpWidget(RepaintBoundary(key: key, child: _app(state, brightness)));
       await tester.pumpAndSettle(const Duration(milliseconds: 400));
       await tester.runAsync(() async {
         final boundary =
             key.currentContext!.findRenderObject()! as RenderRepaintBoundary;
         final image = await boundary.toImage(pixelRatio: 2.75);
         final bytes = await image.toByteData(format: ui.ImageByteFormat.png);
-        File('../screenshots/${entry.value}.png')
+        File('../screenshots/$name.png')
             .writeAsBytesSync(bytes!.buffer.asUint8List());
       });
     }

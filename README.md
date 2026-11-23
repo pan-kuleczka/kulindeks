@@ -64,8 +64,18 @@ any other app. Nothing is left behind.
   <img src="screenshots/messages.png" width="180" alt="Messages"/>
 </p>
 
-<sub>Screenshots use mock data and are generated from
-`app/test/screenshots_test.dart`.</sub>
+**Dark theme & English interface:**
+
+<p align="center">
+  <img src="screenshots/dashboard-dark.png" width="180" alt="Dashboard (dark)"/>
+  <img src="screenshots/timetable-dark.png" width="180" alt="Timetable (dark)"/>
+  <img src="screenshots/grades-dark.png" width="180" alt="Grades (dark)"/>
+  <img src="screenshots/dashboard-en.png" width="180" alt="Dashboard (English)"/>
+  <img src="screenshots/timetable-en.png" width="180" alt="Timetable (English)"/>
+</p>
+
+<sub>Screenshots use mock data and the real Android UI font (Roboto); generated
+from `app/test/screenshots_test.dart`.</sub>
 
 ---
 

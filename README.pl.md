@@ -64,8 +64,18 @@ Gdybyś chciał(a) ją usunąć, po prostu przytrzymaj ikonę aplikacji →
   <img src="screenshots/messages.png" width="180" alt="Wiadomości"/>
 </p>
 
-<sub>Zrzuty korzystają z danych przykładowych i są generowane przez
-`app/test/screenshots_test.dart`.</sub>
+**Motyw ciemny i interfejs angielski:**
+
+<p align="center">
+  <img src="screenshots/dashboard-dark.png" width="180" alt="Pulpit (ciemny)"/>
+  <img src="screenshots/timetable-dark.png" width="180" alt="Plan zajęć (ciemny)"/>
+  <img src="screenshots/grades-dark.png" width="180" alt="Oceny (ciemny)"/>
+  <img src="screenshots/dashboard-en.png" width="180" alt="Pulpit (angielski)"/>
+  <img src="screenshots/timetable-en.png" width="180" alt="Plan zajęć (angielski)"/>
+</p>
+
+<sub>Zrzuty korzystają z danych przykładowych i prawdziwej czcionki Androida
+(Roboto); generowane przez `app/test/screenshots_test.dart`.</sub>
 
 ---
 

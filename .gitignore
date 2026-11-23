@@ -17,3 +17,4 @@ app/**/GeneratedPluginRegistrant.*
 app/.flutter-plugins-dependencies
 app/.metadata
 release/
+app/test/fonts/
