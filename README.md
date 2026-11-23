@@ -1,5 +1,7 @@
 # Kulindeks
 
+*Read this in: **English** · [Polski](README.pl.md)*
+
 **An independent, open-source client for the mStudent university app's API** — plus
 the reverse-engineering work and tooling used to recover that API.
 
