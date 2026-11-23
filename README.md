@@ -21,6 +21,37 @@ The project is quite obviously mostly vibe-coded. This may be a flaw to you, but
 in my opinion it is still better than the original client. I have done my best to
 ensure it is as safe as possible. Approach with caution.
 
+## How to install it (on your phone)
+
+No tech knowledge needed — it's just a few taps.
+
+1. **On your phone**, open this page:
+   [**Releases → latest**](https://github.com/pan-kuleczka/kulindeks/releases/latest).
+2. Under **Assets**, tap **`kulindeks-…-arm64-v8a.apk`** to download it.
+   (This is the right one for almost every phone. If it refuses to install, try
+   the `…-universal.apk` instead.)
+3. Open the downloaded file (tap the download notification, or find it in your
+   **Files / Downloads**). Your phone will ask to **allow installing unknown
+   apps** — tap **Settings → allow**, then go back and tap **Install**. You only
+   have to do this once.
+4. Your phone may show a scary-sounding warning like *"app from an unknown
+   source"* or *"Play Protect didn't recognise this app"* — this is normal for
+   apps that aren't on the Play Store. Choose **Install anyway / More details →
+   Install**.
+5. Open **Kulindeks** and log in with your **university login and password**.
+
+**Important — the login is NOT your e-mail.** Use the same username you'd use for
+your university's mStudent / Wirtualna Uczelnia (often something like
+`name.surname`). If you type an e-mail, the app will warn you — remove the
+`@...` part.
+
+If you ever want to remove it, just long-press the app icon → **Uninstall**, like
+any other app. Nothing is left behind.
+
+> Your login and password are stored **only on your phone** and are sent **only
+> to your own university's server** — never to anyone else. The app has no ads
+> and no tracking.
+
 ---
 
 ## The app
