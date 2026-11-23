@@ -54,6 +54,19 @@ any other app. Nothing is left behind.
 > to your own university's server** — never to anyone else. The app has no ads
 > and no tracking.
 
+## Screenshots
+
+<p align="center">
+  <img src="screenshots/dashboard.png" width="180" alt="Dashboard"/>
+  <img src="screenshots/timetable.png" width="180" alt="Timetable"/>
+  <img src="screenshots/grades.png" width="180" alt="Grades"/>
+  <img src="screenshots/finance.png" width="180" alt="Finances"/>
+  <img src="screenshots/messages.png" width="180" alt="Messages"/>
+</p>
+
+<sub>Screenshots use mock data and are generated from
+`app/test/screenshots_test.dart`.</sub>
+
 ---
 
 ## The app
@@ -67,8 +80,8 @@ A Flutter client for **Android and Linux desktop**:
 - **Messages** — inbox with read/unread and full message view.
 - **Quality of life** — instant cached loads (refreshes in the background), light/dark/high-contrast themes, a custom accent color, adjustable font size, **Polish & English**, class reminders (local notifications), and a clear **offline** indicator that keeps showing cached data.
 
-See [`app/README.md`](app/README.md) for build & run instructions, and the
-[Releases](https://github.com/pan-kuleczka/kulindeks/releases) page for prebuilt APKs.
+Prebuilt APKs are on the [Releases](https://github.com/pan-kuleczka/kulindeks/releases)
+page; to build from source see **Quick start** below.
 
 ## The protocol
 
@@ -118,7 +131,7 @@ cd app && flutter pub get && flutter run
 - **Your data stays yours.** The app talks only to your university's server with
   your own credentials and caches data locally on your device. Nothing is sent
   anywhere else; there is no analytics or telemetry.
-- Credentials are stored on-device only (see [`app/README.md`](app/README.md)).
+- Credentials are stored on-device only.
 
 ## License
 

@@ -54,6 +54,19 @@ Gdybyś chciał(a) ją usunąć, po prostu przytrzymaj ikonę aplikacji →
 > **wyłącznie do serwera Twojej uczelni** — nigdzie indziej. Aplikacja nie ma
 > reklam ani śledzenia.
 
+## Zrzuty ekranu
+
+<p align="center">
+  <img src="screenshots/dashboard.png" width="180" alt="Pulpit"/>
+  <img src="screenshots/timetable.png" width="180" alt="Plan zajęć"/>
+  <img src="screenshots/grades.png" width="180" alt="Oceny"/>
+  <img src="screenshots/finance.png" width="180" alt="Finanse"/>
+  <img src="screenshots/messages.png" width="180" alt="Wiadomości"/>
+</p>
+
+<sub>Zrzuty korzystają z danych przykładowych i są generowane przez
+`app/test/screenshots_test.dart`.</sub>
+
 ---
 
 ## Aplikacja
@@ -67,9 +80,9 @@ Klient Flutter na **Androida i pulpit Linux**:
 - **Wiadomości** — skrzynka z oznaczeniem przeczytane/nieprzeczytane i podglądem treści.
 - **Wygoda** — błyskawiczne ładowanie z pamięci (odświeżanie w tle), motywy jasny/ciemny/wysoki kontrast, własny kolor akcentu, regulacja wielkości czcionki, **polski i angielski**, przypomnienia o zajęciach (powiadomienia lokalne) oraz czytelny wskaźnik **trybu offline**, który dalej pokazuje dane z pamięci.
 
-Instrukcje budowania i uruchamiania znajdziesz w [`app/README.md`](app/README.md),
-a gotowe pliki APK na stronie
-[Releases](https://github.com/pan-kuleczka/kulindeks/releases).
+Gotowe pliki APK są na stronie
+[Releases](https://github.com/pan-kuleczka/kulindeks/releases);
+aby zbudować ze źródeł, zobacz **Szybki start** poniżej.
 
 ## Protokół
 
@@ -120,7 +133,7 @@ cd app && flutter pub get && flutter run
   uczelni, używając Twoich danych logowania, i przechowuje dane lokalnie na
   urządzeniu. Nic nie jest wysyłane gdziekolwiek indziej; brak analityki i
   telemetrii.
-- Dane logowania są przechowywane wyłącznie na urządzeniu (zob. [`app/README.md`](app/README.md)).
+- Dane logowania są przechowywane wyłącznie na urządzeniu.
 
 ## Licencja
 

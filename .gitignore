@@ -16,3 +16,4 @@ app/android/local.properties
 app/**/GeneratedPluginRegistrant.*
 app/.flutter-plugins-dependencies
 app/.metadata
+release/
